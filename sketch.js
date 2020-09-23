@@ -5,10 +5,10 @@ var cameratext = 0
 var cameraflash = 0
 var flash = 1
 function preload() {
-    dress = loadImage('627249.png');
-    museum = loadImage('museum.png');
-    QRCODE = loadImage('QRcode.jpg');
-    music = loadSound('music.mp3');
+    dress = loadImage('assets/627249.png');
+    museum = loadImage('assets/museum.png');
+    QRCODE = loadImage('assets/QRcode.jpg');
+    music = loadSound('assets/music.mp3');
 }
 function setup() {
   // put setup code here
