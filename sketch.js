@@ -7,7 +7,7 @@ var flash = 1
 function preload() {
     dress = loadImage('assets/627249.png');
     museum = loadImage('assets/museum.png');
-    QRCODE = loadImage('assets/QrCODE.jpg');
+    QRCODE = loadImage('assets/scan.jpg');
     music = loadSound('assets/music.mp3');
 }
 function setup() {
