@@ -4,10 +4,13 @@ var canvasHeight = 540;
 var cameratext = 0
 var cameraflash = 0
 var flash = 1
+var clickeddance = 0
+var dancetimer = 0
 function preload() {
     dress = loadImage('assets/627249.png');
     museum = loadImage('assets/museum.png');
     QRCODE = loadImage('assets/scan.jpg');
+    dance = loadImage('assets/dance.png');
     music = loadSound('assets/music.mp3');
 }
 function setup() {
@@ -28,15 +31,42 @@ function  draw() {
     
     if (screen==1) {
         textAlign(CENTER);
-        text("Click the Mouse to imitate a person walking up to the display.", canvasWidth/2+ 100,canvasHeight/2-100);
+         fill(255, 121, 18);
+        rect(0, 0, canvasWidth, canvasHeight);
+        
         image(museum, canvasWidth/2, canvasHeight/2, canvasWidth, canvasHeight);
+        if (mouseX > 300){
+            screen = 2;
+            cameratext = 0;
+            cameraflash = 0;
+            flash = 1;
+            music.play();
+    } 
         
     }else if (screen == 2){
+        if (mouseX < 300){
+            screen = 1;
+             music.stop();
+    } 
         textAlign(CENTER);
+        
         fill(255, 121, 18);
         rect(0, 0, canvasWidth, canvasHeight);
-        image(dress, mouseX, mouseY, 564/2, 564/2);
-       
+        if (clickeddance == 0){
+        image(dress, mouseX+100, mouseY, 564/2, 564/2);
+        } else if(clickeddance == 1){
+            image(dance, mouseX+100, mouseY, 564/2, 564/2);
+        }
+        if (clickeddance == 1){
+            if (dancetimer < 30){
+                dancetimer++;
+            } else if (dancetimer = 30){
+                clickeddance = 0
+                dancetimer = 0
+                
+            }
+        }
+        
         image(museum, canvasWidth/2, canvasHeight/2, canvasWidth, canvasHeight);
         if(cameratext < 255){
             cameratext++;
@@ -44,6 +74,7 @@ function  draw() {
             fill(0, 0, 0);
             text("Get ready for the camera! strike a pose!", canvasWidth/2+ 100,canvasHeight/2-100);
           }
+    
         if(cameraflash < 600){
             cameraflash++;
           }else if (cameraflash == 600){
@@ -54,7 +85,11 @@ function  draw() {
             }else if(flash >= 40 && flash < 100 ){
             fill(255, 121, 18);
             rect(0, 0, canvasWidth, canvasHeight);
-            image(dress, mouseX, mouseY, 564/2, 564/2);
+             if (clickeddance == 0){
+        image(dress, mouseX+100, mouseY, 564/2, 564/2);
+        } else if(clickeddance == 1){
+            image(dance, mouseX+100, mouseY, 564/2, 564/2);
+        }
             image(museum, canvasWidth/2, canvasHeight/2, canvasWidth, canvasHeight);
             flash++;
             }else if (flash  >= 100 && flash < 140){
@@ -64,7 +99,11 @@ function  draw() {
             } else if (flash >= 140 && flash < 200){
             fill(255, 121, 18);
             rect(0, 0, canvasWidth, canvasHeight);
-            image(dress, mouseX, mouseY, 564/2, 564/2);
+             if (clickeddance == 0){
+        image(dress, mouseX+100, mouseY, 564/2, 564/2);
+        } else if(clickeddance == 1){
+            image(dance, mouseX+100, mouseY, 564/2, 564/2);
+        }
             image(museum, canvasWidth/2, canvasHeight/2, canvasWidth, canvasHeight);
             flash++;
             } else if (flash  >= 200 && flash < 240){
@@ -81,12 +120,13 @@ function  draw() {
             
            }
        }
+        fill(255, 255, 255);
+        text("Click to dance.", canvasWidth/2,canvasHeight-20);
+         
      }
 }
 function mousePressed () {
       
-     if (screen==1){
-       screen = 2;  
-       music.play();
-      }
+     clickeddance = 1;
+
 }
